@@ -7,7 +7,7 @@ const authentication = function (req, res, next) {
         let token = req.headers["x-api-key"];
         console.log(token)
 
-        if (!token) return res.status(403).send({ status: false, msg: "Token must be present" });
+        if (!token) return res.status(401).send({ status: false, msg: "Token must be present" });
 
         let decodedToken = jwt.verify(token, "project1");
         console.log(decodedToken)
@@ -26,6 +26,8 @@ const authentication = function (req, res, next) {
 }
 
 
+
+
 const  authorization = async function (req, res, next) {
     try {
         
@@ -40,7 +42,7 @@ const  authorization = async function (req, res, next) {
     
 
         if (req.decodedToken.user !== autherd)
-         return res.status(400).send({ status: false, msg: "you do not have authorization to this " });
+         return res.status(403).send({ status: false, msg: "you do not have authorization to this " });
         else {
             next()
         }

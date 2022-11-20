@@ -8,12 +8,12 @@ const middleware = require("../middleware/auth")
 //router is the function of express lib
 
 router.post("/creatAuthor",newAuthor.createauthor)
-router.post("/createBlogs",newBlogs.createNewBlogs)
+router.post("/createBlogs",middleware.authentication,newBlogs.createNewBlogs)
 router.post("/login",newAuthor.login)
 router.get("/getBlogs",middleware.authentication,newBlogs.getblogs)
 router.put("/updateBlog/:blogId",middleware.authentication,middleware.authorization,newBlogs.updatedblog)
 router.delete("/deleteBlog/:blogId",middleware.authentication,middleware.authorization,newBlogs.deleteBlog)
-router.delete("/deleteByQuery",middleware.authentication,newBlogs.deleteByQuery)
+router.delete("/deleteByQuery",middleware.authentication,middleware.authorization,newBlogs.deleteByQuery)
 
 module.exports=router
 

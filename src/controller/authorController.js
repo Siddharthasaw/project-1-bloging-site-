@@ -76,8 +76,13 @@ const login = async function (req, res) {
       },
       "project1"
     );
-  
+    
    res.status(200).send({status:true,msg:usertoken});
+
+    if(!usertoken)
+    {
+      return res.status(400).send({status:false,msg:"token is incorect"})
+    }
   
     
   } catch(error){
