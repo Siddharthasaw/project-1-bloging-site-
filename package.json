@@ -1,4 +1,15 @@
 {
+ 
+  "name": "bloging-site",
+  "description": "project-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "index.js"
+  },
+  "author": "Kunal,Ganesh,Siddhartha,Sapna",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
     "init": "^0.1.2",
@@ -6,26 +17,6 @@
     "mongoose": "^6.7.2",
     "nodemon": "^2.0.20",
     "validator": "^13.7.0"
-  },
-  "name": "lithium",
-  "description": "Repository for backend cohort - Lithium",
-  "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kunalsingh0709/lithium.git"
-  },
-  "keywords": [
-    "project1"
-  ],
-  "author": "Kunal,Ganesh,Siddhartha,Sapna",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kunalsingh0709/lithium/issues"
-  },
-  "homepage": "https://github.com/kunalsingh0709/lithium#readme"
+  }
+
 }
