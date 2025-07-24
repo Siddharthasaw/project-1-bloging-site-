@@ -1,26 +1,36 @@
- const express = require("express");
- const mongoose = require("mongoose");
- const route = require("./routes/route");
- const app = express() 
+require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const route = require("./routes/route");
+const app = express();
 
- app.use(express.json());   
+app.use(express.json());
 
- mongoose.connect("mongodb+srv://kunal0709:Singhkunal7@cluster0.u5yk4f2.mongodb.net/project1",{
-     useNewUrlParser:true  
- }) 
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+    console.error("MONGO_URI is not defined. Check your .env file and its location.");
+    process.exit(1);
+}
 
- .then(()=> console.log("MongoDB is connected"))  
- .catch(err => console.log(err))
+mongoose.connect(MONGO_URI, {
+    useUnifiedTopology: true
+})
+.then(() => console.log("MongoDB is connected"))
+.catch(err => console.log(err));
 
- 
+app.use("/", route);
 
- app.use("/",route)  
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+});
 
- app.listen(process.env.PORT || 3000, function(){
-     console.log("express app runing on port "+(process.env.PORT || 3000) )
- })
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
+    console.log("Express app running on port " + PORT);
+});
 
 
 
 
-  

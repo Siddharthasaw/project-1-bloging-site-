@@ -1,28 +1,19 @@
-const { Router } = require("express")
-const express = require("express")
+const express = require("express");
 const router = express.Router();
-const newAuthor = require("../controller/authorController")
-const newBlogs = require("../controller/blogsController")
-const middleware = require("../middleware/auth")
+const authorController = require("../controller/authorController");
+const blogsController = require("../controller/blogsController");
+const middleware = require("../middleware/auth");
 
-//router is the function of express lib
+// Author routes
+router.post("/authors", authorController.createAuthor);
+router.post("/login", authorController.login);
 
-router.post("/authors",newAuthor.createauthor)
-router.post("/login",newAuthor.login)
+// Blog routes
+router.post("/createBlogs", middleware.authentication, blogsController.createNewBlogs);
+router.get("/getBlogs", middleware.authentication, blogsController.getBlogs);
+router.put("/updateBlog/:blogId", middleware.authentication, middleware.authorization, blogsController.updateBlog);
 
-router.post("/createBlogs",middleware.authentication,newBlogs.createNewBlogs)
-router.get("/getBlogs",middleware.authentication,newBlogs.getblogs)
-router.put("/updateBlog/:blogId",middleware.authentication,middleware.authorization,newBlogs.updatedblog)
+router.delete("/deleteBlog/:blogId", middleware.authentication, middleware.authorization, blogsController.deleteBlog);
+router.delete("/deleteByQuery", middleware.authentication, middleware.authorization, blogsController.deleteByQuery);
 
-router.delete("/deleteBlog/:blogId",middleware.authentication,middleware.authorization,newBlogs.deleteBlog)
-router.delete("/deleteByQuery",middleware.authentication,middleware.authorization,newBlogs.deleteByQuery)
-
-module.exports=router
-
-
-
-//collection of function is module
-//collection of module is package
-//collection pf package is library
-//collection of library is framework
-//collection of framework is npm
+module.exports = router;
